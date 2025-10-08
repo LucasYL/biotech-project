@@ -1,0 +1,4 @@
+sample_id	strand	cluster_start	cluster_end	product_prediction	confidence
+SampleA	+	980	2150	NRPS	0.78
+SampleA	-	5100	6900	Type I PKS	0.71
+SampleB	+	310	1250	RiPP	0.69

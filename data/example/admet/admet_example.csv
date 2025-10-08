@@ -1,0 +1,4 @@
+CompoundID,logP,TPSA,HBD,HBA,MW,ToxicityFlag,RuleOfFivePass
+CMP001,3.2,85.6,2,7,540,Low,True
+CMP002,5.1,120.0,1,8,620,Medium,False
+CMP003,2.8,65.0,1,6,480,Low,True

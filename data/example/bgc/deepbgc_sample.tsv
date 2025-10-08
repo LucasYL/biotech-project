@@ -1,0 +1,4 @@
+sample_id	cluster_index	cluster_type	start	end	score
+SampleA	1	NRPS	950	2200	0.92
+SampleA	2	PKS	5050	6750	0.81
+SampleB	1	RiPP	320	1150	0.67

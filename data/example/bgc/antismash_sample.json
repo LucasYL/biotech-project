@@ -1,0 +1,41 @@
+{
+  "records": [
+    {
+      "id": "SampleA",
+      "clusters": [
+        {
+          "cluster_id": 1,
+          "type": ["NRPS"],
+          "start": 1000,
+          "end": 2100,
+          "score": 85.5,
+          "core_genes": ["smpA_001", "smpA_015"],
+          "mibig_hits": ["BGC0001"]
+        },
+        {
+          "cluster_id": 2,
+          "type": ["PKS"],
+          "start": 5000,
+          "end": 6800,
+          "score": 72.0,
+          "core_genes": ["smpA_085"],
+          "mibig_hits": []
+        }
+      ]
+    },
+    {
+      "id": "SampleB",
+      "clusters": [
+        {
+          "cluster_id": 1,
+          "type": ["RiPP"],
+          "start": 300,
+          "end": 1200,
+          "score": 64.2,
+          "core_genes": ["smpB_010"],
+          "mibig_hits": ["BGC0500"]
+        }
+      ]
+    }
+  ]
+}

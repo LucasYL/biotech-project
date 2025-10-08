@@ -1,0 +1,12 @@
+{
+  "description": "Minimal example data bundle for the Actinomycete BGC to Metabolomics mini pipeline.",
+  "sources": {
+    "bgc": "Synthetic subset modeled after antiSMASH, DeepBGC, and PRISM outputs (for demonstration only).",
+    "ms": "Hand-crafted LC-MS/MS feature table with representative columns.",
+    "refs": "Synthetic NPAtlas/MIBiG-inspired compound subset.",
+    "admet": "Mock ADMET results to illustrate import functionality."
+  },
+  "samples": ["SampleA", "SampleB"],
+  "compounds": ["CMP001", "CMP002", "CMP003"],
+  "notes": "Data are fictional and intended solely for pipeline demonstration."
+}

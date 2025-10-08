@@ -1,0 +1,10 @@
+{
+  "count": 3,
+  "columns": [
+    "CompoundID",
+    "SMILES",
+    "Fingerprint"
+  ],
+  "fingerprint_bits": 2048,
+  "tool": "rdkit"
+}

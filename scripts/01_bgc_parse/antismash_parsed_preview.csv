@@ -1,0 +1,4 @@
+SampleID,Tool,ClusterIndex,ClusterType,Start,End,Score,CoreEnzymes,MIBiGHits,Length
+SampleA,antismash,1,NRPS,1000,2100,85.5,"['smpA_001', 'smpA_015']",['BGC0001'],1100
+SampleA,antismash,2,PKS,5000,6800,72.0,['smpA_085'],[],1800
+SampleB,antismash,1,RiPP,300,1200,64.2,['smpB_010'],['BGC0500'],900

@@ -1,0 +1,70 @@
+# 配置用途 / Purpose: Define default parameters for the mini pipeline (bilingual comments).
+
+seed: 42  # 随机种子 Random seed
+
+logging:
+  level: INFO  # 默认日志等级 Default log level
+  file: logs/pipeline.log  # 主日志文件 Main log file
+  format: "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+
+bgc_parsing:
+  overlap_threshold: 0.5  # BGC 重叠阈值 / overlap threshold
+  allowed_tools: [antismash, deepbgc, prism]
+  schema:
+    columns:
+      - SampleID
+      - Tool
+      - ClusterIndex
+      - ClusterType
+      - Start
+      - End
+      - Score
+      - CoreEnzymes
+      - MIBiGHits
+
+ms_processing:
+  normalization: tic  # 总离子流归一化 / total ion current normalization
+  intensity_floor: 1000  # 最低强度阈值 / minimum intensity cutoff
+  ppm_tolerance: 10  # 质量误差窗口 / ppm tolerance for m/z checks
+
+linking:
+  weight_bgc_compound: 0.4
+  weight_feature_compound: 0.4
+  weight_bgc_feature: 0.2
+  alpha_bgc_type_match: 0.6
+  beta_mibig_bonus: 0.2
+  gamma_mass_match: 0.7
+  delta_cooccurrence: 0.5
+
+cheminformatics:
+  fingerprint:
+    method: morgan
+    radius: 2
+    n_bits: 2048
+  clustering:
+    method: butina
+    threshold: 0.7
+  umap:
+    n_neighbors: 15
+    min_dist: 0.1
+    metric: jaccard
+
+admet:
+  rule_of_five:
+    max_hba: 10
+    max_hbd: 5
+    max_logp: 5
+    max_mw: 500
+  tpsa_threshold: 140
+
+ranking:
+  weights:
+    evidence: 0.6
+    admet: 0.3
+    novelty: 0.1
+  top_n: 5
+
+reporting:
+  topn_markdown: outputs/topN.md
+  figures_dir: figures
+  pdf_output: outputs/report.pdf
