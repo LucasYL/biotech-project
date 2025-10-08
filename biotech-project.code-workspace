@@ -1,0 +1,36 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "Biotech Project"
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "/opt/miniconda3/envs/actino-mini/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      ".pytest_cache": true
+    },
+    "git.ignoreLimitWarning": true,
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "files.watcherExclude": {
+      "**/intermediate/**": true,
+      "**/figures/**": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-toolsai.jupyter",
+      "eamodio.gitlens"
+    ]
+  }
+}
+
