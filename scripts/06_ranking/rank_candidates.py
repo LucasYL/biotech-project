@@ -88,6 +88,10 @@ def aggregate_evidence(evidence: pd.DataFrame) -> pd.DataFrame:
 
     df = evidence.copy()
     df.replace({"": pd.NA}, inplace=True)
+    
+    # Filter out rows without CompoundID (e.g., bgc_feature evidence type)
+    df = df[df["CompoundID"].notna()]
+    df = df[df["CompoundID"] != ""]
 
     df["CompoundID"] = df["CompoundID"].apply(_sanitize_compound_id)
     df = df[df["CompoundID"] != ""]
@@ -154,7 +158,11 @@ def join_metadata(
     if "ClusterSize" not in result.columns:
         result["ClusterSize"] = pd.NA
     result["Novelty"] = result["ClusterSize"].apply(lambda size: 1.0 / size if isinstance(size, (int, float)) and size and size > 0 else 1.0)
-    result["ADMETScore"] = result["RuleOfFivePass"].fillna(False).astype(float)
+    
+    # Use QED as ADMET Score for better discrimination (0-1 continuous value)
+    # QED > 0.67 is drug-like, 0.5-0.67 is moderate, < 0.5 is poor
+    result["ADMETScore"] = result["QED"].fillna(0.5)
+    
     return result
 
 

@@ -1,0 +1,4 @@
+CompoundID,Name,Source,SMILES,KnownActivity
+CMP001,Actinopeptin,NPAtlas,CC(C)C1=CC(=O)NC(=O)N1C,Yes
+CMP002,Macroketide,MIBiG,CCC1C(C(=O)O1)OC2=CC=CC=C2,No
+CMP003,RiPPamide,NPAtlas,CCN(CC)C(=O)C1CCCN1C(=O)O,Unknown

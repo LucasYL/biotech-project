@@ -2,3 +2,11 @@ CompoundID,Name,Source,SMILES,KnownActivity
 CMP001,Actinopeptin,NPAtlas,CC(C)C1=CC(=O)NC(=O)N1C,Yes
 CMP002,Macroketide,MIBiG,CCC1C(C(=O)O1)OC2=CC=CC=C2,No
 CMP003,RiPPamide,NPAtlas,CCN(CC)C(=O)C1CCCN1C(=O)O,Unknown
+CMP004,Streptomycin-like,MIBiG,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,Yes
+CMP005,Novel-NRPS,NPAtlas,CC(C)CC1NC(=O)C(NC(=O)C(NC1=O)C)C,Unknown
+CMP006,PKS-derivative,MIBiG,CCCCC(=O)C1=CC=CC=C1O,No
+CMP007,Lipopeptide,NPAtlas,CCCCCCCCCCCCCC(=O)NC(CO)C(=O)O,Yes
+CMP008,Small-RiPP,NPAtlas,CC(C)C(=O)NC(C)C(=O)O,Unknown
+CMP009,Large-NRPS,MIBiG,CC(C)CC(NC(=O)C(NC(=O)C(NC(=O)C(N)CC(C)C)C)CC(C)C)C(=O)O,No
+CMP010,Hybrid-NRP-PK,MIBiG,CCC(C)C(=O)C1=CC=C(C=C1)OC2=CC=CC=C2C(=O)O,Unknown
+
