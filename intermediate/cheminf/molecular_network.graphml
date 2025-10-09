@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d6" for="node" attr.name="community" attr.type="long" />
+  <key id="d5" for="node" attr.name="Lipinski_Pass" attr.type="boolean" />
+  <key id="d4" for="node" attr.name="DrugLikeness" attr.type="string" />
+  <key id="d3" for="node" attr.name="QED" attr.type="double" />
+  <key id="d2" for="node" attr.name="logP" attr.type="double" />
+  <key id="d1" for="node" attr.name="MW" attr.type="double" />
+  <key id="d0" for="node" attr.name="compound_id" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="CMP001">
+      <data key="d0">CMP001</data>
+      <data key="d1">168.2</data>
+      <data key="d2">0.2</data>
+      <data key="d3">0.651</data>
+      <data key="d4">Good</data>
+      <data key="d5">True</data>
+      <data key="d6">0</data>
+    </node>
+    <node id="CMP002">
+      <data key="d0">CMP002</data>
+      <data key="d1">192.21</data>
+      <data key="d2">1.77</data>
+      <data key="d3">0.685</data>
+      <data key="d4">Good</data>
+      <data key="d5">True</data>
+      <data key="d6">1</data>
+    </node>
+    <node id="CMP003">
+      <data key="d0">CMP003</data>
+      <data key="d1">214.26</data>
+      <data key="d2">1.0</data>
+      <data key="d3">0.762</data>
+      <data key="d4">Excellent</data>
+      <data key="d5">True</data>
+      <data key="d6">2</data>
+    </node>
+  </graph>
+</graphml>
