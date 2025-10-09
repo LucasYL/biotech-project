@@ -1,6 +1,8 @@
 {
-  "num_nodes": 3,
-  "num_edges": 0,
-  "density": 0,
-  "num_connected_components": 3
+  "num_nodes": 10,
+  "num_edges": 1,
+  "density": 0.022222222222222223,
+  "num_connected_components": 9,
+  "average_clustering": 0.0,
+  "transitivity": 0
 }

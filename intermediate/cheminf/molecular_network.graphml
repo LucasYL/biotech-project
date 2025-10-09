@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d8" for="edge" attr.name="similarity" attr.type="double" />
+  <key id="d7" for="edge" attr.name="weight" attr.type="double" />
   <key id="d6" for="node" attr.name="community" attr.type="long" />
   <key id="d5" for="node" attr.name="Lipinski_Pass" attr.type="boolean" />
   <key id="d4" for="node" attr.name="DrugLikeness" attr.type="string" />
@@ -35,5 +37,72 @@
       <data key="d5">True</data>
       <data key="d6">2</data>
     </node>
+    <node id="CMP004">
+      <data key="d0">CMP004</data>
+      <data key="d1">194.19</data>
+      <data key="d2">-1.03</data>
+      <data key="d3">0.538</data>
+      <data key="d4">Good</data>
+      <data key="d5">True</data>
+      <data key="d6">3</data>
+    </node>
+    <node id="CMP005">
+      <data key="d0">CMP005</data>
+      <data key="d1">255.32</data>
+      <data key="d2">-0.46</data>
+      <data key="d3">0.624</data>
+      <data key="d4">Good</data>
+      <data key="d5">True</data>
+      <data key="d6">4</data>
+    </node>
+    <node id="CMP006">
+      <data key="d0">CMP006</data>
+      <data key="d1">178.23</data>
+      <data key="d2">2.77</data>
+      <data key="d3">0.72</data>
+      <data key="d4">Excellent</data>
+      <data key="d5">True</data>
+      <data key="d6">5</data>
+    </node>
+    <node id="CMP007">
+      <data key="d0">CMP007</data>
+      <data key="d1">315.45</data>
+      <data key="d2">3.25</data>
+      <data key="d3">0.405</data>
+      <data key="d4">Moderate</data>
+      <data key="d5">True</data>
+      <data key="d6">6</data>
+    </node>
+    <node id="CMP008">
+      <data key="d0">CMP008</data>
+      <data key="d1">159.18</data>
+      <data key="d2">0.23</data>
+      <data key="d3">0.619</data>
+      <data key="d4">Good</data>
+      <data key="d5">True</data>
+      <data key="d6">8</data>
+    </node>
+    <node id="CMP009">
+      <data key="d0">CMP009</data>
+      <data key="d1">428.57</data>
+      <data key="d2">1.01</data>
+      <data key="d3">0.295</data>
+      <data key="d4">Poor</data>
+      <data key="d5">True</data>
+      <data key="d6">8</data>
+    </node>
+    <node id="CMP010">
+      <data key="d0">CMP010</data>
+      <data key="d1">298.34</data>
+      <data key="d2">4.41</data>
+      <data key="d3">0.802</data>
+      <data key="d4">Excellent</data>
+      <data key="d5">True</data>
+      <data key="d6">7</data>
+    </node>
+    <edge source="CMP008" target="CMP009">
+      <data key="d7">0.35135135135135137</data>
+      <data key="d8">0.35135135135135137</data>
+    </edge>
   </graph>
 </graphml>

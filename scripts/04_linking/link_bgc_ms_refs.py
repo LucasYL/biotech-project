@@ -49,7 +49,7 @@ OUTPUT_COLUMNS = ["BGCUID", "FeatureID", "CompoundID", "EvidenceType", "Evidence
 TYPE_MAPPING = {
     "NRPS": {"NPAtlas", "MIBiG"},
     "PKS": {"MIBiG"},
-    "RiPP": {"NPAtlas", "MIBiG"},
+    "RIPP": {"NPAtlas", "MIBiG"},  # Use uppercase to match expand_cluster_types()
 }
 
 
