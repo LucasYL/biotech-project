@@ -149,6 +149,10 @@ def render_ranked_candidates(ranking_df):
         st.markdown("#### 🎯 Top 5 Candidates")
         top_5 = ranking_df.head(5)
         
+        # Show simplified table with key columns only
+        key_columns = ['Rank', 'CompoundID', 'AggregateScore', 'EvidenceCount', 'DrugLikeness', 'QED']
+        display_cols = [col for col in key_columns if col in top_5.columns]
+        
         # Add styling
         def highlight_top(row):
             if row.name == 0:
@@ -157,8 +161,42 @@ def render_ranked_candidates(ranking_df):
                 return ['background-color: #FFFFE0'] * len(row)  # Light yellow for top 3
             return [''] * len(row)
         
-        styled_df = top_5.style.apply(highlight_top, axis=1)
+        styled_df = top_5[display_cols].style.apply(highlight_top, axis=1).format({
+            'AggregateScore': '{:.3f}',
+            'QED': '{:.3f}'
+        })
         st.dataframe(styled_df, use_container_width=True)
+        
+        # Add "Why These Candidates?" explanation for Top 3
+        st.markdown("#### 💡 Why These Top 3?")
+        for idx in range(min(3, len(top_5))):
+            row = top_5.iloc[idx]
+            cid = row['CompoundID']
+            score = row['AggregateScore']
+            evidence_cnt = row.get('EvidenceCount', 0)
+            qed = row.get('QED', 0)
+            drug_likeness = row.get('DrugLikeness', 'N/A')
+            
+            reasons = []
+            if qed > 0.7:
+                reasons.append(f"🌟 **Excellent QED** ({qed:.3f}) - highly drug-like")
+            elif qed > 0.6:
+                reasons.append(f"✅ **Good QED** ({qed:.3f}) - drug-like properties")
+            
+            if evidence_cnt >= 3:
+                reasons.append(f"🔗 **Strong evidence** ({int(evidence_cnt)} links)")
+            elif evidence_cnt >= 2:
+                reasons.append(f"🔗 **Moderate evidence** ({int(evidence_cnt)} links)")
+            
+            if drug_likeness == "Excellent":
+                reasons.append("💊 **Passes all drug-likeness rules**")
+            
+            reason_text = " | ".join(reasons) if reasons else "Balanced profile"
+            
+            if idx == 0:
+                st.success(f"**#{idx+1} {cid}** (Score: {score:.3f}): {reason_text}")
+            else:
+                st.info(f"**#{idx+1} {cid}** (Score: {score:.3f}): {reason_text}")
         
         # Full table in expander
         with st.expander("📋 Full Ranking Table", expanded=False):
@@ -219,10 +257,35 @@ def render_evidence_details(evidence_df):
             with col3:
                 feature_compound = type_counts.get('feature_compound', 0)
                 st.metric("Feature-Compound Links", feature_compound)
+                if feature_compound == 0:
+                    st.caption("⚠️ No m/z matches found (require <10ppm tolerance)")
         
-        # Show sample evidence
-        st.markdown("#### Sample Evidence (First 20 rows)")
-        st.dataframe(evidence_df.head(20), use_container_width=True)
+        # Show sample evidence with filtering
+        st.markdown("#### 🔍 Evidence Explorer")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # Filter by Evidence Type
+            if 'EvidenceType' in evidence_df.columns:
+                evidence_types = ['All'] + list(evidence_df['EvidenceType'].unique())
+                selected_type = st.selectbox("Filter by Evidence Type", evidence_types)
+        
+        with col2:
+            # Filter by CompoundID
+            if 'CompoundID' in evidence_df.columns:
+                compound_ids = ['All'] + sorted([cid for cid in evidence_df['CompoundID'].unique() if cid])
+                selected_compound = st.selectbox("Filter by CompoundID", compound_ids)
+        
+        # Apply filters
+        filtered_df = evidence_df.copy()
+        if selected_type != 'All':
+            filtered_df = filtered_df[filtered_df['EvidenceType'] == selected_type]
+        if selected_compound != 'All':
+            filtered_df = filtered_df[filtered_df['CompoundID'] == selected_compound]
+        
+        st.write(f"**Showing {len(filtered_df)} of {len(evidence_df)} evidence links**")
+        st.dataframe(filtered_df.head(50), use_container_width=True)
         
         # Full table download
         st.download_button(
@@ -288,9 +351,51 @@ def render_admet_analysis(admet_df):
                 st.write("**Drug-Likeness Distribution**:")
                 st.write(drug_likeness_counts)
         
-        # Full ADMET table
+        # Full ADMET table with color coding
         st.markdown("#### 📋 Detailed ADMET Properties")
-        st.dataframe(admet_df, use_container_width=True)
+        
+        # Add reference ranges in help text
+        st.caption("""
+        **Reference Ranges (Lipinski & Veber Rules)**:  
+        MW ≤500 | logP ≤5 | TPSA ≤140 | HBD ≤5 | HBA ≤10 | RotBonds ≤10 | QED: 0.67-0.80 ideal
+        """)
+        
+        # Function to highlight values
+        def highlight_admet(row):
+            colors = []
+            for col in row.index:
+                val = row[col]
+                color = ''
+                
+                # Apply color rules based on Lipinski/Veber criteria
+                if col == 'MW' and isinstance(val, (int, float)):
+                    color = 'background-color: #90EE90' if val <= 500 else 'background-color: #FFB6C1'
+                elif col == 'logP' and isinstance(val, (int, float)):
+                    color = 'background-color: #90EE90' if val <= 5 else 'background-color: #FFB6C1'
+                elif col == 'TPSA' and isinstance(val, (int, float)):
+                    color = 'background-color: #90EE90' if val <= 140 else 'background-color: #FFB6C1'
+                elif col == 'HBD' and isinstance(val, (int, float)):
+                    color = 'background-color: #90EE90' if val <= 5 else 'background-color: #FFB6C1'
+                elif col == 'HBA' and isinstance(val, (int, float)):
+                    color = 'background-color: #90EE90' if val <= 10 else 'background-color: #FFB6C1'
+                elif col == 'RotatableBonds' and isinstance(val, (int, float)):
+                    color = 'background-color: #90EE90' if val <= 10 else 'background-color: #FFB6C1'
+                elif col == 'QED' and isinstance(val, (int, float)):
+                    if val >= 0.67:
+                        color = 'background-color: #90EE90'
+                    elif val >= 0.5:
+                        color = 'background-color: #FFFFE0'
+                    else:
+                        color = 'background-color: #FFB6C1'
+                
+                colors.append(color)
+            return colors
+        
+        # Apply styling
+        styled_admet = admet_df.style.apply(highlight_admet, axis=1)
+        st.dataframe(styled_admet, use_container_width=True)
+        
+        st.caption("🟢 Green = Ideal | 🟡 Yellow = Moderate | 🔴 Pink = Outside range")
         
         # Download
         st.download_button(
@@ -390,7 +495,42 @@ def render_network_stats():
         
         with col3:
             density = stats.get('density', 0)
-            st.metric("Network Density", f"{density:.3f}")
+            density_interpretation = (
+                "🎯 High diversity!" if density < 0.1
+                else "Moderate diversity" if density < 0.3
+                else "Similar structures"
+            )
+            st.metric(
+                "Network Density", 
+                f"{density:.3f}",
+                help=f"Low density = High structural diversity. {density_interpretation}"
+            )
+        
+        # Add interpretation box
+        if density < 0.1:
+            st.success(f"""
+            ✅ **Low Density ({density:.3f}) = High Structural Diversity**
+            
+            This is excellent! It means:
+            - Most compounds are **structurally unique** (not redundant)
+            - Each compound likely has **distinct biological activity**
+            - High potential for **novel mechanisms of action**
+            - Maximize hit diversity in screening campaigns
+            """)
+        else:
+            st.info(f"""
+            **Moderate/High Density ({density:.3f})**
+            
+            - Some compounds share similar structures
+            - May form chemical families with related activities
+            - Consider testing 1-2 representatives per cluster
+            """)
+        
+        # Network visualization
+        network_viz_path = FIGURE_DIR / "molecular_network.png"
+        if network_viz_path.exists():
+            st.markdown("#### 🎨 Network Visualization")
+            st.image(str(network_viz_path), caption="Molecular Similarity Network (Tanimoto > 0.3)", use_column_width=True)
         
         # Network metrics table
         if network_metrics_path.exists():
